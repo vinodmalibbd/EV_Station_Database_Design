@@ -1,8 +1,21 @@
 # EV_Station_Database_Design
 
-The Ev station project is focused on online booking for user on ev station.
+The EV station project is focused on online booking for user on ev station.
 ## ER Diagram
 ![App Screenshot](MicrosoftTeams-image.png)
+
+#### Booking table
+![App Screenshot](booking.png)
+#### Time table
+![App Screenshot](time.png)
+#### Feedback table
+![App Screenshot](feedback.png)
+#### User view 
+![App Screenshot](userview.png)
+
+#### Station view 
+![App Screenshot](stationview.png)
+
 
 ### Procedure which show the bookings according to station
 
@@ -47,10 +60,17 @@ The Ev station project is focused on online booking for user on ev station.
 
 #### Creating view for Station to show the details of user ie.(not giving access to attribute like password and role)
 	create view show_user_details as
-	select user_id,user_name,user_email from users;
+		select user_id,user_name,user_email from users;
 
 	
 	select * from show_user_details; //execute the view
+
+#### Creating view for Station to show the details of user ie.(not giving access to attribute like password and role)
+ 	create view show_station_details as
+		select station_id,station_name,station_longitude,station_lattitude from station;
+	
+ 
+ 	select * from show_station_details; //execute the view
 
  
 ## Features
