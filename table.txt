@@ -1,0 +1,63 @@
+CREATE TABLE users (
+  user_id int NOT NULL AUTO_INCREMENT,
+  user_email varchar(25) NOT NULL,
+  user_name varchar(25) NOT NULL,
+  user_pass varchar(25) NOT NULL,
+  user_role varchar(255) NOT NULL,
+  PRIMARY KEY (user_id),
+  UNIQUE KEY  (user_email)
+)
+
+CREATE TABLE timing (
+  timing_id int NOT NULL AUTO_INCREMENT,
+  end_time int NOT NULL,
+  start_time int NOT NULL,
+  PRIMARY KEY (timing_id)
+)
+
+CREATE TABLE station (
+  station_id int NOT NULL AUTO_INCREMENT,
+  close_time int NOT NULL,
+  email varchar(255) NOT NULL,
+  lattitude double NOT NULL,
+  longitude double NOT NULL,
+  open_time int NOT NULL,
+  password varchar(255) NOT NULL,
+  station_name varchar(255) NOT NULL,
+  PRIMARY KEY (station_id)
+)
+
+CREATE TABLE slots (
+  slot_id int NOT NULL AUTO_INCREMENT,
+  station_id int NOT NULL,
+  PRIMARY KEY (slot_id),
+  CONSTRAINT  FOREIGN KEY (station_id) REFERENCES station (station_id)
+)
+
+CREATE TABLE feedback (
+  feedback_id int NOT NULL AUTO_INCREMENT,
+  feedback varchar(255) NOT NULL,
+  rating int NOT NULL,
+  station_id int NOT NULL,
+  user_id int NOT NULL,
+  PRIMARY KEY (feedback_id),
+  CONSTRAINT  FOREIGN KEY (station_id) REFERENCES station (station_id),
+  CONSTRAINT  FOREIGN KEY (user_id) REFERENCES users (user_id)
+)
+
+
+CREATE TABLE booking (
+  booking_id int NOT NULL AUTO_INCREMENT,
+  date date NOT NULL,
+  status varchar(255) NOT NULL,
+  slot_id int NOT NULL,
+  station_id int NOT NULL,
+  time_id int NOT NULL,
+  user_id int NOT NULL,
+  PRIMARY KEY (booking_id),
+  UNIQUE KEY  (time_id),
+  CONSTRAINT  FOREIGN KEY (station_id) REFERENCES station (station_id),
+  CONSTRAINT  FOREIGN KEY (user_id) REFERENCES users (user_id),
+  CONSTRAINT FOREIGN KEY (slot_id) REFERENCES slots (slot_id),
+  CONSTRAINT  FOREIGN KEY (time_id) REFERENCES timing (timing_id)
+)
